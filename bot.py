@@ -1,4 +1,4 @@
-import websocket
+import websocket, json, pprint
 
 SOCKET = "wss://stream.binance.com:9443/ws/ethusdt@kline_1m"
 
@@ -10,7 +10,19 @@ def on_close(ws):
 
 def on_message(ws, message):
     print('received message')
-    print(message)
+    # print(message)
+    json_message = json.loads(message)
+    #print(json_message)
+    pprint.pprint(json_message)
+
+    candle = message['k']
+
+    is_candle_closed = candle['x']
+
+    close = candle['c']
+
+    if is_candle_closed:
+        print['candle closed at {}', format(close)]
 
 try:
     # code that might raise an exception
