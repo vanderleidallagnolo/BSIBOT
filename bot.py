@@ -22,7 +22,7 @@ def on_message(ws, message):
     close = candle['c']
 
     if is_candle_closed:
-        print['candle closed at {}', format(close)]
+        print('candle closed at {}', format(close))
 
 try:
     # code that might raise an exception
