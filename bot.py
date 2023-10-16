@@ -10,6 +10,7 @@ def on_close(ws):
 
 def on_message(ws, message):
     print('received message')
+    print(message)
 
 try:
     # code that might raise an exception
