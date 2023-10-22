@@ -1,6 +1,9 @@
-import websocket, json, pprint
+import websocket, json, pprint, numpy
+import talib
 
 SOCKET = "wss://stream.binance.com:9443/ws/ethusdt@kline_1m"
+
+closes = []
 
 def on_open(ws):
     print('opened connection')
@@ -9,13 +12,16 @@ def on_close(ws):
     print('closed connection')
 
 def on_message(ws, message):
+
+    global closes
+
     print('received message')
     # print(message)
     json_message = json.loads(message)
     #print(json_message)
     pprint.pprint(json_message)
 
-    candle = message['k']
+    candle = json_message['k']
 
     is_candle_closed = candle['x']
 
@@ -23,6 +29,10 @@ def on_message(ws, message):
 
     if is_candle_closed:
         print('candle closed at {}', format(close))
+
+        closes.append(float(close))
+        print("closes")
+        print(closes)
 
 try:
     # code that might raise an exception
