@@ -1,5 +1,6 @@
-import websocket, json, pprint, numpy
+import websocket, json, pprint
 import talib
+import numpy 
 
 SOCKET = "wss://stream.binance.com:9443/ws/ethusdt@kline_1m"
 
